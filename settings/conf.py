@@ -21,10 +21,10 @@ BOT_API = get_env_variable("BOT_API")
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-    'http://52.59.208.159:20'
+    'http://52.59.208.159:8000'
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    'http://52.59.208.159:20'
+    'http://52.59.208.159:8000'
 ]
 
 ALLOWED_HOSTS = []
