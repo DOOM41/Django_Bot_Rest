@@ -19,7 +19,7 @@ from abstracts.paginators import AbstractPageNumberPaginator
 from messages_to_bot.serializers import MessageSerializer
 from messages_to_bot.models import MessagesToBot
 from messages_to_bot.utils import send_telegram_message
-
+from auths.models import CustomUser
 
 class MessageViewSet(
     ModelViewSet,
@@ -34,14 +34,16 @@ class MessageViewSet(
 
     def create(self, request: Request):
         text = request.data['text_of_message']
-        user = request.user
-        try:
-            MessagesToBot.objects.create(
-                user=user,
-                text_of_message=text
-            )
-        except:
-            return 
+        user: CustomUser = request.user
+        if not user.chat_id:
+            return Response(data={
+                'result': "Вы не отправили код боту."
+            }, status=400)
+        mess = MessagesToBot.objects.create(
+            user=user,
+            text_of_message=text
+        )
+        mess.save()
         result_text = f"{user.first_name}, я получил от тебя сообщение:\n{text}"
         asyncio.run(send_telegram_message(
             chat_id=int(user.chat_id),
@@ -55,9 +57,9 @@ class MessageViewSet(
 
         paginator: AbstractPageNumberPaginator = \
             self.pagination_class()
-        user = request.user
+        user: CustomUser = request.user
         objects: list[Any] = paginator.paginate_queryset(
-            MessagesToBot.objects.messages_by_user(user.id),
+            MessagesToBot.objects.messages_by_user(user),
             request
         )
         serializer: MessageSerializer = \

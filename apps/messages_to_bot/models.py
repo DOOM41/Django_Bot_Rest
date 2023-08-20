@@ -12,8 +12,8 @@ from auths.models import CustomUser
 
 
 class MessagesToBotManager(Manager):
-    def messages_by_user(self, user_id):
-        return self.filter(user_id=user_id)
+    def messages_by_user(self, user: CustomUser):
+        return self.filter(user=user)
     
     
 class MessagesToBot(AbstractsDateTime):
