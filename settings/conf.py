@@ -17,6 +17,16 @@ ADMIN_SITE_URL = get_env_variable("ADMIN_SITE_URL")
 
 BOT_API = get_env_variable("BOT_API")
 
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+    '*'
+]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    '*'
+]
+
 ALLOWED_HOSTS = []
 
 ROOT_URLCONF = 'settings.urls'
