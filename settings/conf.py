@@ -27,7 +27,10 @@ CORS_ALLOW_CREDENTIALS = True
 #     'http://52.59.208.159:8000'
 # ]
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "52.59.208.159",
+    "172.31.17.173"
+]
 
 ROOT_URLCONF = 'settings.urls'
 
