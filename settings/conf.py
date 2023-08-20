@@ -1,11 +1,10 @@
-from pathlib import Path
 import os
 import sys
 
 from . import get_env_variable
 
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.abspath(os.path.join(__file__, '../../../'))
 sys.path.append(BASE_DIR)
 sys.path.append(os.path.join(BASE_DIR, 'apps'))
 
